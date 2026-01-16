@@ -5,7 +5,7 @@
 ![ML](https://img.shields.io/badge/XGBoost-2.0-green)
 ![Status](https://img.shields.io/badge/Status-Deployed-success)
 
-🔴 **Live Demo:** [Click here to view the App](🔴 **Live Demo:** [Click here to view the App](https://ecommerce-churn-predictiongit-qr4xwis3jph4rmfas48jdu.streamlit.app/))
+🔴 **Live Demo:** [Click here to view the App](🔴 **Live Demo:** [Click here to view the App](https://healthcareoutcomesprediction-kgfhvuup6cqzcasvt7ofp5.streamlit.app))
 
 ---
 
