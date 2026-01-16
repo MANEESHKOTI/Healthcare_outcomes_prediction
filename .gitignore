@@ -1,0 +1,28 @@
+# General Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# macOS Junk
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE Settings
+.vscode/
+.idea/
+
+# Model & Data Artifacts
+# We are NOT ignoring data/ because your Dashboard needs the CSVs to run online.
+# We are NOT ignoring .pkl files because your Dashboard needs the Model/Scaler.
+
+# If you had massive files (>100MB), you would ignore them here, 
+# but your stroke dataset is small (~300KB), so it is safe to upload everything.
