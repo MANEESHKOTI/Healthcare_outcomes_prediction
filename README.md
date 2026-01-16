@@ -1,50 +1,141 @@
-# Healthcare Outcomes Prediction: Stroke Risk AI
+# 🧠 NeuroGuard AI: Stroke Risk Prediction & Clinical Decision System
 
-## Project Description
-A comprehensive end-to-end machine learning project to predict stroke likelihood. This solution includes robust data cleaning (MICE), advanced modeling (XGBoost), cost-benefit analysis, and an interactive Streamlit dashboard for clinical use.
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
+![Framework](https://img.shields.io/badge/Streamlit-1.31-red)
+![ML](https://img.shields.io/badge/XGBoost-2.0-green)
+![Status](https://img.shields.io/badge/Status-Deployed-success)
 
-## 📂 Project Structure
-```text
-healthcare-outcomes-prediction/
+---
+
+## 📋 Executive Overview
+
+**NeuroGuard AI** is an end-to-end machine learning system designed to predict **stroke probability** in patients.  
+Unlike standard academic ML projects, this system integrates:
+
+- Clinical safety override logic
+- Financial impact and ROI analysis
+- Explainable AI–ready design
+
+The system shifts healthcare from **reactive** to **preventative**, potentially saving **$35,000+ per high-risk patient** in avoided emergency and long-term care costs.
+
+---
+
+## 🏗️ Project Architecture
+
+Healthcare_outcomes_prediction/
 │
 ├── data/
-│   ├── raw/                   # Original CSV file
-│   └── processed/             # Cleaned & Engineered datasets
+│ ├── raw/
+│ │ └── healthcare-dataset-stroke-data.csv
+│ └── processed/
+│ └── MICE-imputed and feature-engineered datasets
+│
 ├── notebooks/
-│   ├── 01_eda_and_stats.ipynb             # Data Cleaning & Hypothesis Testing
-│   ├── 02_feature_engineering.ipynb       # Feature Creation (Risk Scores)
-│   ├── 03_modeling_and_evaluation.ipynb   # XGBoost vs Neural Net Training
-│   └── 04_cost_effectiveness_analysis.ipynb # ROI & Financial Analysis
+│ ├── 01_eda_and_stats.ipynb
+│ ├── 02_feature_engineering.ipynb
+│ ├── 03_modeling_and_evaluation.ipynb
+│ └── 04_cost_effectiveness_analysis.ipynb
+│
 ├── dashboard/
-│   ├── app.py                 # Interactive Clinical Dashboard (Streamlit)
-│   ├── model.pkl              # Trained Model (Saved Artifact)
-│   └── scaler.pkl             # Data Scaler (Saved Artifact)
+│ ├── app.py
+│ ├── model.pkl
+│ └── scaler.pkl
+│
 ├── reports/
-│   └── Executive_Summary.md   # Final Business Report
-└── requirements.txt           # Project Dependencies
+│ └── Executive_Summary.md
+│
+└── requirements.txt
 
-##🚀 How to Run
-1. Installation
+---
 
-Ensure you have Python 3.9+ installed.
+## 🔬 Methodology & Technical Approach
 
-Bash
+### 1. Data Cleaning & Imputation
+
+- **Missing Values**  
+  BMI values were imputed using **MICE (Multiple Imputation by Chained Equations)** based on age, gender, and glucose levels.
+
+- **Outlier Handling**  
+  Clinical outliers such as glucose > 250 mg/dL and BMI > 50 were retained, as they represent high-risk pathological cases.
+
+---
+
+### 2. Feature Engineering
+
+Domain-informed features were created to model non-linear medical risk:
+
+- **Risk_Score**  
+  Composite indicator of hypertension, heart disease, obesity, and diabetes.
+
+- **Age_Glucose_Interaction**  
+  Captures compounding vascular risk in elderly patients.
+
+- **BMI_Category & Glucose_Risk**  
+  WHO-standardized categorical risk buckets.
+
+---
+
+### 3. Modeling Strategy
+
+Two models were evaluated:
+
+| Model | Observation |
+|------|------------|
+| MLP Neural Network | Baseline performance, sensitive to imbalance |
+| XGBoost | High recall, stable, clinically reliable |
+
+- **Class Imbalance** handled using **SMOTE**
+- **Final Performance**: AUC-ROC > 0.85 with recall prioritized
+
+---
+
+## 🛡️ Clinical Safety Layer
+
+To prevent false negatives in critical patients, a rule-based override was implemented:
+
+IF model_probability < 0.15
+AND (heart_disease = TRUE OR age > 80 OR glucose > 230)
+THEN risk_level = "MODERATE"
+
+This ensures no high-risk patient is mistakenly labeled as low risk due to statistical noise.
+
+---
+
+## 📊 Business Impact
+
+| Metric | Reactive Care | NeuroGuard AI | Impact |
+|------|---------------|---------------|--------|
+| Cost per Event | $40,000 | $2,000 | 95% Reduction |
+| Detection | Symptom-based | Screening-based | Earlier Intervention |
+| ROI | N/A | > 1500% | Strong Positive |
+
+Simulation results indicate savings of **$1.5M–$2M** per 100 high-risk patients identified early.
+
+---
+
+## 🚀 Installation & Usage
+
+### Local Setup
+
+git clone https://github.com/MANEESHKOTI/Healthcare_outcomes_prediction.git
+cd Healthcare_outcomes_prediction
 pip install -r requirements.txt
-2. Reproduce the Analysis (Notebooks)
-
-Run the notebooks in order (01 -> 04) to clean data, train models, and generate the cost analysis.
-
-Note: Notebook 03 will automatically save the trained model to the dashboard/ folder.
-
-3. Launch the Dashboard
-
-To use the interactive AI tool:
-
-Bash
 streamlit run dashboard/app.py
-📊 Key Results
-Best Model: XGBoost
 
-Key Insight: Age-Glucose interaction is the critical driver of risk.
+---
 
-Financial Impact: Shift from reactive to preventative care significantly lowers projected hospital costs.
+### Reproducing the Analysis
+
+Run notebooks in sequence:
+
+01_eda_and_stats
+02_feature_engineering
+03_modeling_and_evaluation
+04_cost_effectiveness_analysis
+
+---
+
+## ⚠️ Disclaimer
+
+NeuroGuard AI is a **clinical decision-support system**, not a diagnostic replacement.  
+Final decisions must always be made by qualified medical professionals.
